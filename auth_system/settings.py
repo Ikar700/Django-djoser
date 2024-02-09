@@ -91,13 +91,17 @@ DATABASES = {
 #email address = storingudemy@gmail.com
 #app password = fbdxyvjoijoltqpf
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'storingudemy@gmail.com'
-EMAIL_HOST_PASSWORD = 'fbdxyvjoijoltqpf'
-EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'storingudemy@gmail.com'
+# EMAIL_HOST_PASSWORD = 'fbdxyvjoijoltqpf'
+# EMAIL_USE_TLS = True
 
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '66c81d9ec78b69'
+EMAIL_HOST_PASSWORD = '5480c48403a605'
+EMAIL_PORT = '2525'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -140,6 +144,9 @@ STATICFILE_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSIONCLASSES': [
+        'rest_framework_.permissions.IsAuthenticated'
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
@@ -160,6 +167,7 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
+    'LOGIN_ON_REGISTRATION':False,
     'SERIALIZERS': {
         'user_create': 'accounts.serializers.UserCreateSerializer',
         'user': 'accounts.serializers.UserCreateSerializer',
